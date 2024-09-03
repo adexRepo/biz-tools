@@ -1,6 +1,6 @@
 package ecnic.service.money.transaction.domain;
 
-import static ecnic.service.common.config.DatabaseConstants.MONEY;
+import static ecnic.service.common.constants.DatabaseConstant.MONEY;
 
 import ecnic.service.common.models.BaseEntity;
 import ecnic.service.money.transaction.domain.models.TransactionType;

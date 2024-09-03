@@ -1,6 +1,7 @@
 package ecnic.service.user.domain;
 
 import ecnic.service.user.domain.models.User;
+import ecnic.service.user.domain.models.UserCredential;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 interface UserRepository extends JpaRepository<UserEntity, Long> {
+  
+  UserEntity findByUsername(String username);
+  
   
   /**
    * Find all by page.
@@ -34,6 +38,7 @@ interface UserRepository extends JpaRepository<UserEntity, Long> {
       ) from UserEntity usr
       """)
   Page<User> findAllBy(Pageable pageable);
+  
   
   /**
    * Find all by ids list.

@@ -1,18 +1,20 @@
 package ecnic.service.user.domain.models;
 
-import ecnic.service.common.models.RoleType;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record CreateUser(
-    String username,
-    String firstname,
-    String middleName,
-    String lastName,
-    RoleType role,
-    List<String> address,
-    List<String> phoneNumber,
-    List<String> email,
-    Long createdBy
+        String username,
+        @NotNull String password,
+        @NotNull String firstName,
+        String middleName,
+        String lastName,
+        @NotNull List<String> deviceIds,
+        @NotNull List<UserRole> userRoles,
+        List<String> addresses,
+        List<String> phoneNumbers,
+        List<String> emails,
+        @NotNull String createdBy
 ) {
 
 }

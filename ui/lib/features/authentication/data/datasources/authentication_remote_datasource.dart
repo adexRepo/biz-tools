@@ -3,6 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ui/core/error/exceptions.dart';
 import 'package:ui/features/authentication/data/models/credentials_model.dart';
 import 'package:ui/features/authentication/data/models/user_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 abstract class AuthenticationRemoteDataSource {
   Future<CredentialsModel> logIn();
@@ -14,12 +16,12 @@ class AuthenticationRemoteDataSourceImpl
   late Auth0Web auth0Web;
 
   AuthenticationRemoteDataSourceImpl() {
-    auth0Web =
-        Auth0Web(dotenv.env['AUTH0_DOMAIN']!, dotenv.env['AUTH0_CLIENT_ID']!);
-    // Install required callback
-    auth0Web.onLoad().then((credentials) {
-      // Do nothing
-    });
+    // auth0Web =
+    //     Auth0Web(dotenv.env['AUTH0_DOMAIN']!, dotenv.env['AUTH0_CLIENT_ID']!);
+    // // Install required callback
+    // auth0Web.onLoad().then((credentials) {
+    //   // Do nothing
+    // });
   }
 
   @override

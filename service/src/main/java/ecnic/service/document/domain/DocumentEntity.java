@@ -1,6 +1,6 @@
 package ecnic.service.document.domain;
 
-import static ecnic.service.common.config.DatabaseConstants.DOCUMENT;
+import static ecnic.service.common.constants.DatabaseConstant.DOCUMENT;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ecnic.service.common.models.BaseEntity;
