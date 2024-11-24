@@ -71,6 +71,7 @@ public class WalletServiceImpl implements WalletService {
     entity = walletRepository.saveAndFlush(walletEntityOptional.get());
     return convertToWallet(entity);
   }
+  
 
   @Override
   public List<Wallet> moveAmount(MoveAmountWallet moveAmountWallet) {

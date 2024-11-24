@@ -9,7 +9,7 @@ import static ecnic.service.user.constants.UserPathConstant.USERS;
 import ecnic.service.user.UserService;
 import ecnic.service.user.domain.models.CreateUser;
 import ecnic.service.user.domain.models.User;
-import ecnic.service.user.domain.models.UserCredential;
+import ecnic.service.common.security.UserCredential;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RestController;
 class UserController {
     
     private final UserService userService;
-    
     
     @GetMapping(value = AUTHN_LOGIN)
     public ResponseEntity<UserCredential> login(
@@ -49,7 +48,7 @@ class UserController {
     }
     
     @PostMapping(value = CREATE)
-    public ResponseEntity<List<User>> registration(
+    public ResponseEntity<List<User>> createUser(
             @RequestBody List<CreateUser> createUsers
     ) {
         return ResponseEntity.ok(userService.createUser(createUsers));

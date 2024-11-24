@@ -1,5 +1,7 @@
 package ecnic.service.user.domain.models;
 
+import ecnic.service.common.models.BaseRecord;
+import ecnic.service.common.security.UserRole;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
@@ -15,6 +17,5 @@ public record CreateUser(
         List<String> phoneNumbers,
         List<String> emails,
         @NotNull String createdBy
-) {
-
+) implements BaseRecord {
 }

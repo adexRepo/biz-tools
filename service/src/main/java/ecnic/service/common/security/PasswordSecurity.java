@@ -1,4 +1,4 @@
-package ecnic.service.config.security;
+package ecnic.service.common.security;
 
 import static ecnic.service.common.exceptions.GenericExceptionCodeEnum.TECHNICAL_EXCEPTION;
 
@@ -7,13 +7,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
  * The type Password security.
  */
 @UtilityClass
-@Component
 @Slf4j
 public class PasswordSecurity {
     

@@ -1,4 +1,4 @@
-package ecnic.service.config.security.limiter;
+package ecnic.service.common.security.limiter;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.ObjectPostProcessor;

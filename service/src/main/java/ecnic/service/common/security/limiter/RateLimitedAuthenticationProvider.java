@@ -1,4 +1,4 @@
-package ecnic.service.config.security.limiter;
+package ecnic.service.common.security.limiter;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,7 +27,7 @@ public class RateLimitedAuthenticationProvider implements AuthenticationProvider
         if (checkLimit(parentAuthenticate)) {
             return parentAuthenticate;
         }
-        throw new BadCredentialsException("Are you bot ?, so fast!");
+        throw new BadCredentialsException("Are you bot?, so fast!");
     }
 
     private boolean checkLimit(Authentication parentAuthenticate) {

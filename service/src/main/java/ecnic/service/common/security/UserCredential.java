@@ -1,7 +1,10 @@
-package ecnic.service.user.domain.models;
+package ecnic.service.common.security;
 
 import java.util.Set;
 
+/**
+ * The type User credential.
+ */
 public record UserCredential(
         String username,
         String firstName,

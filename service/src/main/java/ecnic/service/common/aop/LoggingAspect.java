@@ -1,4 +1,4 @@
-package ecnic.service.config.aop;
+package ecnic.service.common.aop;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;

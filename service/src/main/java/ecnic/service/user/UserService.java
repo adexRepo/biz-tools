@@ -4,8 +4,9 @@ import ecnic.service.common.models.PagedResult;
 import ecnic.service.user.domain.models.CreateUser;
 import ecnic.service.user.domain.models.UpdateUser;
 import ecnic.service.user.domain.models.User;
-import ecnic.service.user.domain.models.UserCredential;
+import ecnic.service.common.security.UserCredential;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
@@ -14,14 +15,15 @@ public interface UserService {
     
     UserCredential login(String username, String password);
     
+    List<User> createUser(List<CreateUser> createUsers);
+    
     PagedResult<User> getUsers(Pageable pageable);
     
-    User getUser(Long id);
+    User getUser(UUID id);
     
-    List<User> createUser(List<CreateUser> createUsers);
     
     List<User> updateUser(List<UpdateUser> updateUsers);
     
-    void deleteUser(Long ids);
+    void deleteUser(UUID ids);
     
 }

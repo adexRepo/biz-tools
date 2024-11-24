@@ -1,6 +1,6 @@
 package ecnic.service.money.transaction.domain;
 
-import static ecnic.service.common.constants.DatabaseConstant.MONEY;
+import static ecnic.service.common.constants.DatabaseConstant.DB_SCHEMA_MONEY;
 
 import ecnic.service.common.models.BaseEntity;
 import ecnic.service.money.transaction.domain.models.TransactionType;
@@ -17,7 +17,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
-@Table(schema = MONEY, name = "t_transaction")
+@Table(schema = DB_SCHEMA_MONEY, name = "t_transaction")
 @Data
 @Entity
 class TransactionEntity extends BaseEntity {

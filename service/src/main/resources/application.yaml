@@ -4,6 +4,8 @@ server:
     context-path: /biz-tools-svc
 
 spring:
+  jackson:
+    time-zone: Asia/Jakarta
   output:
     ansi:
       enabled: always
@@ -20,7 +22,7 @@ spring:
       idleTimeout: ${DB_HIKARI_IDLE_TIMEOUT:300000}
   jpa:
     open-in-view: false
-    show-sql: false
+    show-sql: true
     generate-ddl: false
     hibernate:
       ddl-auto: none # or update, create, validate as needed
@@ -29,6 +31,8 @@ spring:
     events:
       jdbc-schema-initialization:
         enabled: true
+  flyway:
+    out-of-order: true
 
 logging:
   level:

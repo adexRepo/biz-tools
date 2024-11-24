@@ -1,6 +1,6 @@
 package ecnic.service.document.domain;
 
-import static ecnic.service.common.constants.DatabaseConstant.DOCUMENT;
+import static ecnic.service.common.constants.DatabaseConstant.DB_SCHEMA_DOCUMENT;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ecnic.service.common.models.BaseEntity;
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
-@Table(schema = DOCUMENT, name = "t_document")
+@Table(schema = DB_SCHEMA_DOCUMENT, name = "t_document")
 @EqualsAndHashCode(callSuper = false)
 class DocumentEntity extends BaseEntity {
 
