@@ -2,6 +2,7 @@ package ecnic.service.user.domain;
 
 import ecnic.service.common.security.UserCredential;
 import ecnic.service.user.domain.models.CreateUser;
+import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.User;
 import java.util.List;
 import org.mapstruct.Mapper;
@@ -13,8 +14,10 @@ interface UserMapper {
     
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
     
-    List<UserEntity> createUsersToEntities(List<CreateUser> createUsers);
+    UserEntity toEntity(CreateUserDTO createUsers);
     
+    User toRecordUser(CreateUserDTO createUsers);
+
     List<User> entitiesToUsers(List<UserEntity> entities);
     
     UserCredential userEntityToUserCredential(UserEntity userEntity);

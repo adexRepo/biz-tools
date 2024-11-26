@@ -1,7 +1,9 @@
 package ecnic.service.common.models;
 
 
+import ecnic.service.common.constants.BaseStatus;
 import ecnic.service.common.constants.BaseStatus.OperationalStatus;
+import ecnic.service.common.exceptions.ErrorCode;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
@@ -26,7 +28,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @EntityListeners(value = {AuditingEntityListener.class})
-public class BaseEntity {
+public class BaseDTO {
     
     /**
      * The Created by.
@@ -46,14 +48,12 @@ public class BaseEntity {
      * The Modified by.
      */
     @LastModifiedBy
-    @Column(nullable = false)
     protected String modifiedBy;
     
     /**
      * The Modified dtm.
      */
     @LastModifiedDate
-    @Column(nullable = false)
     protected ZonedDateTime modifiedDtm;
     
     /**
@@ -68,24 +68,4 @@ public class BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     protected OperationalStatus status;
-    
-    /**
-     * On create.
-     */
-    @PrePersist
-    protected void onCreate() {
-        createdDtm = ZonedDateTime.now();
-        modifiedDtm = ZonedDateTime.now();
-        status = OperationalStatus.ACTIVE;
-    }
-    
-    /**
-     * On update.
-     */
-    @PreUpdate
-    protected void onUpdate() {
-        modifiedDtm = ZonedDateTime.now();
-        version++;
-    }
-    
 }

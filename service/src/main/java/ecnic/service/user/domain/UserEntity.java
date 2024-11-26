@@ -41,7 +41,6 @@ class UserEntity extends BaseEntity {
     private List<String> address;
     private List<String> phoneNumber;
     private Locale locale;
-    
     private boolean isLogin;
     
     @ElementCollection(fetch = FetchType.EAGER)

@@ -2,6 +2,7 @@ package ecnic.service.user.domain;
 
 import ecnic.service.user.domain.models.User;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 interface UserRepository extends JpaRepository<UserEntity, UUID> {
   
-  UserEntity findByUsername(String username);
+  Optional<UserEntity> findByUsername(String username);
 
 }

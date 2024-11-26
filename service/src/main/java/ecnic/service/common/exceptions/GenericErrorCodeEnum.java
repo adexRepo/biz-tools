@@ -5,13 +5,14 @@ import static ecnic.service.common.constants.ErrorCodeConstant.PREFIX_ERROR_CODE
 import java.util.Locale;
 import lombok.Getter;
 
-public enum GenericExceptionCodeEnum implements ErrorCode {
+public enum GenericErrorCodeEnum implements ErrorCode {
     
     UNHANDLED(PREFIX_ERROR_CODE_GENERIC + "0001", "Unhandled exception"),
     BAD_REQUEST(PREFIX_ERROR_CODE_GENERIC + "0002", "Bad request"),
     REQUEST_VALIDATION(PREFIX_ERROR_CODE_GENERIC + "0003", "Invalid Request"),
     VERSION_MISMATCH(PREFIX_ERROR_CODE_GENERIC + "0004", "Record already updated by others"),
-    TECHNICAL_EXCEPTION(PREFIX_ERROR_CODE_GENERIC + "0005", "Technical exception, please contact service owner");
+    TECHNICAL_EXCEPTION(PREFIX_ERROR_CODE_GENERIC + "0005", "Technical exception, please contact service owner"),
+    LAST_PROCESS(PREFIX_ERROR_CODE_GENERIC + "0006", "No next step for COMPLETED process");
     
     private static final String GENERIC_BIZ_TOOLS = "GENERIC-BIZ-TOOLS";
     
@@ -19,7 +20,7 @@ public enum GenericExceptionCodeEnum implements ErrorCode {
     private final String description;
     private final String code;
     
-    GenericExceptionCodeEnum(String code, String description) {
+    GenericErrorCodeEnum(String code, String description) {
         this.code = code;
         this.description = description;
     }

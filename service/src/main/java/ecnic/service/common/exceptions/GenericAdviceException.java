@@ -29,9 +29,9 @@ public class GenericAdviceException extends ResponseEntityExceptionHandler {
     ProblemDetail handlerBadRequest(Exception e) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
         problemDetail.setTitle("Invalid Request");
-        problemDetail.setProperty(ERROR_CODE, GenericExceptionCodeEnum.BAD_REQUEST);
+        problemDetail.setProperty(ERROR_CODE, GenericErrorCodeEnum.BAD_REQUEST);
         problemDetail.setProperty(ERROR_DESCRIPTION,
-                GenericExceptionCodeEnum.BAD_REQUEST.getDescription());
+                GenericErrorCodeEnum.BAD_REQUEST.getDescription());
         problemDetail.setProperty(TIMESTAMP, Instant.now());
         problemDetail.setDetail(e.getMessage());
         return problemDetail;
@@ -47,9 +47,9 @@ public class GenericAdviceException extends ResponseEntityExceptionHandler {
     ProblemDetail handleException(Exception e) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
         problemDetail.setTitle("Technical exception");
-        problemDetail.setProperty(ERROR_CODE, GenericExceptionCodeEnum.TECHNICAL_EXCEPTION);
+        problemDetail.setProperty(ERROR_CODE, GenericErrorCodeEnum.TECHNICAL_EXCEPTION);
         problemDetail.setProperty(ERROR_DESCRIPTION,
-                GenericExceptionCodeEnum.TECHNICAL_EXCEPTION.getDescription());
+                GenericErrorCodeEnum.TECHNICAL_EXCEPTION.getDescription());
         problemDetail.setProperty(TIMESTAMP, Instant.now());
         problemDetail.setDetail(e.getMessage());
         return problemDetail;

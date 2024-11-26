@@ -8,6 +8,7 @@ import static ecnic.service.user.constants.UserPathConstant.USERS;
 
 import ecnic.service.user.UserService;
 import ecnic.service.user.domain.models.CreateUser;
+import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.User;
 import ecnic.service.common.security.UserCredential;
 import java.util.List;
@@ -49,7 +50,7 @@ class UserController {
     
     @PostMapping(value = CREATE)
     public ResponseEntity<List<User>> createUser(
-            @RequestBody List<CreateUser> createUsers
+            @RequestBody List<CreateUserDTO> createUsers
     ) {
         return ResponseEntity.ok(userService.createUser(createUsers));
     }

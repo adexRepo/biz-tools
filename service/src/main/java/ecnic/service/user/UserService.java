@@ -2,6 +2,7 @@ package ecnic.service.user;
 
 import ecnic.service.common.models.PagedResult;
 import ecnic.service.user.domain.models.CreateUser;
+import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.UpdateUser;
 import ecnic.service.user.domain.models.User;
 import ecnic.service.common.security.UserCredential;
@@ -15,7 +16,7 @@ public interface UserService {
     
     UserCredential login(String username, String password);
     
-    List<User> createUser(List<CreateUser> createUsers);
+    List<User> createUser(List<CreateUserDTO> createUsers);
     
     PagedResult<User> getUsers(Pageable pageable);
     

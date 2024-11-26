@@ -1,6 +1,8 @@
 package ecnic.service.user.domain;
 
 import static ecnic.service.common.security.PasswordSecurity.checkPasswordsMatch;
+import static ecnic.service.user.constants.UserErrorEnum.USERNAME_AND_PASSWORD_NOT_MATCH;
+import static ecnic.service.user.constants.UserErrorEnum.USER_NOT_FOUND;
 
 import ecnic.service.common.exceptions.GenericBizException;
 import ecnic.service.common.models.PagedResult;
@@ -9,13 +11,13 @@ import ecnic.service.common.security.UserCredential;
 import ecnic.service.common.security.jwt.JwtService;
 import ecnic.service.user.UserService;
 import ecnic.service.user.constants.UserErrorEnum;
-import ecnic.service.user.domain.models.CreateUser;
+import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.UpdateUser;
 import ecnic.service.user.domain.models.User;
-import java.security.NoSuchAlgorithmException;
+import ecnic.service.user.domain.models.UserStatus;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -36,26 +38,32 @@ class UserServiceImpl implements UserService {
     
     @Override
     public UserCredential findUsername(String username) {
-        UserEntity userEntity = userRepository.findByUsername(username);
-        return UserMapper.INSTANCE.userEntityToUserCredential(userEntity);
+        Optional<UserEntity> userEntityOptional = userRepository.findByUsername(username);
+        
+        if (userEntityOptional.isEmpty()) {
+            throw new GenericBizException(USER_NOT_FOUND, USER_NOT_FOUND.getDescription());
+        }
+        
+        return UserMapper.INSTANCE.userEntityToUserCredential(userEntityOptional.get());
     }
     
     @Override
     public UserCredential login(String username, String password) {
-        UserEntity userEntity = userRepository.findByUsername(username);
+        Optional<UserEntity> userEntityOptional = userRepository.findByUsername(username);
         
-        if (Objects.isNull(userEntity)) {
-            throw new GenericBizException(UserErrorEnum.USER_NOT_FOUND,
-                    String.format(UserErrorEnum.USER_NOT_FOUND.getDescription(), username));
+        if (userEntityOptional.isEmpty()) {
+            throw new GenericBizException(USER_NOT_FOUND, USER_NOT_FOUND.getDescription());
         }
+        
+        UserEntity userEntity = userEntityOptional.get();
         
         // future need to verify device permitted
         boolean isCorrectPassword = checkPasswordsMatch(password, userEntity.getPassword(),
                 userEntity.getSaltPassword());
         
         if (!isCorrectPassword) {
-            throw new GenericBizException(UserErrorEnum.USERNAME_AND_PASSWORD_NOT_MATCH,
-                    String.format(UserErrorEnum.USERNAME_AND_PASSWORD_NOT_MATCH.getDescription(),
+            throw new GenericBizException(USERNAME_AND_PASSWORD_NOT_MATCH,
+                    String.format(USERNAME_AND_PASSWORD_NOT_MATCH.getDescription(),
                             username));
         }
         
@@ -64,23 +72,40 @@ class UserServiceImpl implements UserService {
     }
     
     @Override
-    public List<User> createUser(List<CreateUser> createUser) {
-        List<UserEntity> newUserEntities =
-                UserMapper.INSTANCE.createUsersToEntities(createUser);
+    public List<User> createUser(List<CreateUserDTO> createUsers) {
         
-        for (UserEntity entity : newUserEntities) {
+        List<User> records = new ArrayList<>();
+        for (CreateUserDTO dto : createUsers) {
+            
+            Optional<UserEntity> optionalUserEntity = userRepository.findByUsername(
+                    dto.getUsername());
+            
+            if (optionalUserEntity.isPresent()) {
+                dto.setUserStatus(UserStatus.USERNAME_EXIST);
+                continue;
+            }
+            
             try {
+                UserEntity entity = UserMapper.INSTANCE.toEntity(dto);
+                
                 String saltPassword = String.valueOf(Instant.now().toEpochMilli());
                 String encryptedPassword = PasswordSecurity.encryptPassword(entity.getPassword(),
                         saltPassword);
+                
                 entity.setSaltPassword(saltPassword);
                 entity.setPassword(encryptedPassword);
-            } catch (NoSuchAlgorithmException nsae) {
-                log.error("[User Module] createUser {} failed");
+                
+                dto.setUserStatus(UserStatus.DONE_CREATED);
+                userRepository.saveAndFlush(entity);
+            } catch (Exception e) {
+                log.error("[User Module] Exception {}", e.getMessage());
+                dto.setUserStatus(UserStatus.FAILED_ERROR);
             }
+            User recordUser = UserMapper.INSTANCE.toRecordUser(dto);
+            records.add(recordUser);
         }
-        List<UserEntity> userEntities = userRepository.saveAllAndFlush(newUserEntities);
-        return UserMapper.INSTANCE.entitiesToUsers(userEntities);
+        
+        return records;
     }
     
     

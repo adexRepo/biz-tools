@@ -1,6 +1,6 @@
 package ecnic.service.common.security;
 
-import static ecnic.service.common.exceptions.GenericExceptionCodeEnum.TECHNICAL_EXCEPTION;
+import static ecnic.service.common.exceptions.GenericErrorCodeEnum.TECHNICAL_EXCEPTION;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

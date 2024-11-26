@@ -13,6 +13,8 @@ public enum UserErrorEnum implements ErrorCode {
             "Login attempt failed due to an invalid password. Please check your password and try again.a"),
     YOUR_DEVICE_NOT_PERMITTED_TO_LOGIN(PREFIX_ERROR_CODE_USER + "0003",
             "Your device is not permitted to log in. Please verify your device settings or contact support for assistance."),
+    NO_NEXT_STEP_FOR_COMPLETED_PROCESS(PREFIX_ERROR_CODE_USER + "0003",
+            "Your device is not permitted to log in. Please verify your device settings or contact support for assistance."),
     ;
     private static final String MODULE = "USER-BIZ-TOOLS";
     

@@ -1,7 +1,47 @@
 package ecnic.service.common.constants;
 
-public enum BaseStatus {
-  ACTIVE,
-  INACTIVE,
-  LOCKED
+import static ecnic.service.common.exceptions.GenericErrorCodeEnum.LAST_PROCESS;
+
+import ecnic.service.common.exceptions.GenericBizException;
+
+public class BaseStatus {
+  
+  public enum OperationalStatus {
+    ACTIVE,
+    INACTIVE
+  }
+  
+  public enum ResultStatus {
+    SUCCESS,
+    FAILED
+  }
+  
+  public enum ApprovalStatus {
+    APPROVED,
+    REJECTED
+  }
+  
+  public enum ProcessingStatus {
+    NEW {
+      @Override
+      public ProcessingStatus next() {
+        return PROCESSING;
+      }
+    },
+    PROCESSING {
+      @Override
+      public ProcessingStatus next() {
+        return COMPLETED;
+      }
+    },
+    COMPLETED {
+      @Override
+      public ProcessingStatus next() {
+        throw new GenericBizException(LAST_PROCESS, LAST_PROCESS.getDescription());
+      }
+    };
+    
+    public abstract ProcessingStatus next();
+  }
+  
 }
