@@ -17,7 +17,7 @@ class AuthenticationRemoteDataSourceImpl
 
   AuthenticationRemoteDataSourceImpl() {
     // auth0Web =
-    //     Auth0Web(dotenv.env['AUTH0_DOMAIN']!, dotenv.env['AUTH0_CLIENT_ID']!);
+    //     Auth0Web(dotenv.env['AUTH0_DOMAIN']!,  ;
     // // Install required callback
     // auth0Web.onLoad().then((credentials) {
     //   // Do nothing

@@ -9,13 +9,13 @@ abstract class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure(String message) : super(message);
+  const ServerFailure(super.message);
 }
 
 class TimeoutFailure extends Failure {
-  const TimeoutFailure(String message) : super(message);
+  const TimeoutFailure(super.message);
 }
 
-class EmailVerifiedFailure extends Failure{
-  const EmailVerifiedFailure(String message) : super(message);
+class EmailVerifiedFailure extends Failure {
+  const EmailVerifiedFailure(super.message);
 }
