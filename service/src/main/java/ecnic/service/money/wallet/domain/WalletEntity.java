@@ -1,6 +1,6 @@
 package ecnic.service.money.wallet.domain;
 
-import static ecnic.service.common.config.DatabaseConstants.MONEY;
+import static ecnic.service.common.constants.DatabaseConstant.DB_SCHEMA_MONEY;
 
 import ecnic.service.common.models.BaseEntity;
 import ecnic.service.money.wallet.domain.models.WalletType;
@@ -16,7 +16,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
-@Table(schema = MONEY, name = "t_wallet")
+@Table(schema = DB_SCHEMA_MONEY, name = "t_wallet")
 @Data
 @Entity
 class WalletEntity extends BaseEntity {

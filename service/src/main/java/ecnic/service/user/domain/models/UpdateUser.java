@@ -1,9 +1,10 @@
 package ecnic.service.user.domain.models;
 
 import java.util.List;
+import java.util.UUID;
 
 public record UpdateUser(
-    Long id,
+    UUID id,
     String firstName,
     String middleName,
     String lastName,

@@ -1,9 +1,11 @@
 server:
   port: ${SERVER_PORT:9091}
   servlet:
-    context-path: /tools-svc
+    context-path: /biz-tools-svc
 
 spring:
+  jackson:
+    time-zone: Asia/Jakarta
   output:
     ansi:
       enabled: always
@@ -20,7 +22,7 @@ spring:
       idleTimeout: ${DB_HIKARI_IDLE_TIMEOUT:300000}
   jpa:
     open-in-view: false
-    show-sql: false
+    show-sql: true
     generate-ddl: false
     hibernate:
       ddl-auto: none # or update, create, validate as needed
@@ -29,9 +31,16 @@ spring:
     events:
       jdbc-schema-initialization:
         enabled: true
+  flyway:
+    out-of-order: true
 
 logging:
   level:
     root: ${LOG_LEVEL_ROOT:INFO}
     org.springframework.web: INFO
     ecnic.service: ${LOG_LEVEL_SVC:INFO}
+
+api:
+  security:
+    token:
+      secret: ${API_SECURITY_TOKEN:9a2f8c4e6b0d71f3e8b925a45747f894a3d6bc70fa8d5e21a15a6d8c3b9a0e7c}

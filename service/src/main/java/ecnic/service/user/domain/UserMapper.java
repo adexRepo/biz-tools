@@ -1,64 +1,29 @@
 package ecnic.service.user.domain;
 
-import ecnic.service.common.models.StatusType;
+import ecnic.service.common.security.UserCredential;
 import ecnic.service.user.domain.models.CreateUser;
-import ecnic.service.user.domain.models.UpdateUser;
+import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.User;
 import java.util.List;
-import java.util.Optional;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
 
-final class UserMapper {
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+interface UserMapper {
+    
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    
+    UserEntity toEntity(CreateUserDTO createUsers);
+    
+    User toRecordUser(CreateUserDTO createUsers);
 
-  private UserMapper() {
-  }
-
-  static User convertToUser(UserEntity entity) {
-    return new User(
-        entity.getId(),
-        entity.getFirstName(),
-        entity.getMiddleName(),
-        entity.getLastName(),
-        entity.getAddress(),
-        entity.getPhoneNumber(),
-        entity.getEmail()
-    );
-  }
-
-  static List<User> convertToUser(List<UserEntity> createUsers) {
-    return createUsers.stream().map(UserMapper::convertToUser).toList();
-  }
-
-  static UserEntity convertToEntity(CreateUser createUser) {
-    UserEntity userEntity = new UserEntity();
-    userEntity.setUsername(createUser.username());
-    userEntity.setFirstName(createUser.firstname());
-    userEntity.setMiddleName(createUser.middleName());
-    userEntity.setLastName(createUser.lastName());
-    userEntity.setAddress(createUser.address());
-    userEntity.setCreatedBy(createUser.createdBy().toString());
-    userEntity.setModifiedBy(createUser.createdBy().toString());
-    userEntity.setStatus(StatusType.ACTIVE);
-    userEntity.setRoleType(createUser.role());
-    return userEntity;
-  }
-
-  static List<UserEntity> convertToEntity(List<CreateUser> createUsers) {
-    return createUsers.stream().map(UserMapper::convertToEntity).toList();
-  }
-
-  static void convertToEntity(UserEntity userEntity, UpdateUser updatedUser) {
-    userEntity.setFirstName(updatedUser.firstName());
-    userEntity.setMiddleName(updatedUser.middleName());
-    userEntity.setLastName(updatedUser.lastName());
-    userEntity.setAddress(updatedUser.address());
-    userEntity.setModifiedBy(String.valueOf(updatedUser.modifiedBy()));
-  }
-
-  static void convertToEntity(List<UserEntity> userEntities, List<UpdateUser> updatedUser) {
-    for (UserEntity entity : userEntities) {
-      Optional<UpdateUser> optionalUpdateUser =
-          updatedUser.stream().filter(val -> val.id().equals(entity.getId())).findFirst();
-      optionalUpdateUser.ifPresent(updateUser -> convertToEntity(entity, updateUser));
-    }
-  }
+    List<User> entitiesToUsers(List<UserEntity> entities);
+    
+    UserCredential userEntityToUserCredential(UserEntity userEntity);
+    
+    UserCredential userEntityToUserCredentialAndToken(UserEntity userEntity, String token);
+    
+    User entityToUser(UserEntity userEntity);
+    
 }
