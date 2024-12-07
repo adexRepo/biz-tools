@@ -23,12 +23,12 @@ final class DocumentMapper {
     documentEntity.setContentType(uploadDocument.contentType());
     documentEntity.setData(file.getBytes());
     documentEntity.setCreatedBy(uploadDocument.uploadBy());
-    documentEntity.setModifiedBy(uploadDocument.uploadBy());
+    documentEntity.setUpdatedBy(uploadDocument.uploadBy());
     return documentEntity;
   }
 
   static void updateEntity(DocumentEntity documentEntity, UpdateDocument updateDocument) {
-    documentEntity.setModifiedBy(updateDocument.updateBy());
+    documentEntity.setUpdatedBy(updateDocument.updateBy());
     documentEntity.setFileName(updateDocument.fileName());
   }
 }

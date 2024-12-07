@@ -11,9 +11,9 @@ public class RateLimiterAuthenticationProviderProcessor<T extends Authentication
     }
 
     @Override
-    public <O extends T> O postProcess(O object) {
+    public <V extends T> V postProcess(V object) {
         if (clazz.isAssignableFrom(object.getClass())) {
-            return (O) new RateLimitedAuthenticationProvider(object);
+            return (V) new RateLimitedAuthenticationProvider(object);
         }
         return object;
     }

@@ -60,8 +60,11 @@ public class SecurityConfiguration {
                     handler.authenticationEntryPoint(unauthorizedHandler); // when not login
                 })
                 .authorizeHttpRequests(authorizeConfig -> {
-                    authorizeConfig.requestMatchers(HttpMethod.GET, "/api/users/test1").permitAll();
-                    authorizeConfig.requestMatchers(HttpMethod.POST, "/api/v1/users/register")
+                    authorizeConfig
+                            .requestMatchers(HttpMethod.GET, "/api/users/test1")
+                            .permitAll();
+                    authorizeConfig
+                            .requestMatchers(HttpMethod.POST, "/api/v1/users/create")
                             .permitAll();
                     authorizeConfig.requestMatchers("/upload.html").permitAll();
                     authorizeConfig.requestMatchers("/swagger-ui.html/**").permitAll();
@@ -77,7 +80,7 @@ public class SecurityConfiguration {
     
     
     @Bean
-    private CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // configuration.setAllowedOrigins(List.of("http://localhost:88291"));
         configuration.setAllowedOrigins(List.of("*"));

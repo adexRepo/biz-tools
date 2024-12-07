@@ -1,14 +1,15 @@
 package ecnic.service.common.constants;
 
-import static ecnic.service.common.exceptions.GenericErrorCodeEnum.LAST_PROCESS;
+import static ecnic.service.common.exceptions.BaseExceptionEnum.LAST_PROCESS;
 
 import ecnic.service.common.exceptions.GenericBizException;
 
 public class BaseStatus {
   
-  public enum OperationalStatus {
+  public enum RecordStatus {
     ACTIVE,
-    INACTIVE
+    INACTIVE,
+    DELETED
   }
   
   public enum ResultStatus {

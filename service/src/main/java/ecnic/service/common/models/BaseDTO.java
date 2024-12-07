@@ -1,35 +1,24 @@
 package ecnic.service.common.models;
 
 
-import ecnic.service.common.constants.BaseStatus;
-import ecnic.service.common.constants.BaseStatus.OperationalStatus;
-import ecnic.service.common.exceptions.ErrorCode;
+import ecnic.service.common.constants.BaseStatus.RecordStatus;
 import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
-/**
- * The type Base entity.
- */
-@MappedSuperclass
-@Data
-@EqualsAndHashCode(callSuper = false)
-@EntityListeners(value = {AuditingEntityListener.class})
-public class BaseDTO {
+public class BaseDTO implements Serializable {
     
+    @Serial
+    private static final long serialVersionUID = 2611653907960515145L;
     /**
      * The Created by.
      */
@@ -41,6 +30,7 @@ public class BaseDTO {
      * The Created dtm.
      */
     @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
     protected ZonedDateTime createdDtm;
     
@@ -53,6 +43,7 @@ public class BaseDTO {
     /**
      * The Modified dtm.
      */
+    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     protected ZonedDateTime modifiedDtm;
     
@@ -67,5 +58,5 @@ public class BaseDTO {
      */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    protected OperationalStatus status;
+    protected RecordStatus status;
 }

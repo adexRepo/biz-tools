@@ -6,14 +6,14 @@ import static ecnic.service.user.constants.UserPathConstant.AUTHN_CHECK_USERNAME
 import static ecnic.service.user.constants.UserPathConstant.AUTHN_LOGIN;
 import static ecnic.service.user.constants.UserPathConstant.USERS;
 
+import ecnic.service.common.security.UserCredential;
 import ecnic.service.user.UserService;
-import ecnic.service.user.domain.models.CreateUser;
 import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.User;
-import ecnic.service.common.security.UserCredential;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(API_V1 + USERS)
+@RequestMapping(value = API_V1 + USERS,produces =  MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 class UserController {
     

@@ -31,7 +31,7 @@ final class WalletMapper {
     entity.setWalletUserId(createWallet.walletUser());
     entity.setDefaultCurrency(createWallet.defaultCurrency());
     entity.setCreatedBy(createWallet.walletUser().toString());
-    entity.setModifiedBy(createWallet.walletUser().toString());
+    entity.setUpdatedBy(createWallet.walletUser().toString());
     return entity;
   }
 

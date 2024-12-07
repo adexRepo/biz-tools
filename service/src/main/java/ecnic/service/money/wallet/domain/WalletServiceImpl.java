@@ -94,9 +94,9 @@ public class WalletServiceImpl implements WalletService {
           .add(moveAmountWallet.amountReceived());
 
       walletSender.get().setBalance(reductionWalletBalance);
-      walletSender.get().setModifiedBy(moveAmountWallet.idUser().toString());
+      walletSender.get().setUpdatedBy(moveAmountWallet.idUser().toString());
       walletReceive.get().setBalance(additionWalletBalance);
-      walletSender.get().setModifiedBy(moveAmountWallet.idUser().toString());
+      walletSender.get().setUpdatedBy(moveAmountWallet.idUser().toString());
       List<WalletEntity> entitiesTargetSave = List.of(walletSender.get(), walletReceive.get());
       walletRepository.saveAllAndFlush(entitiesTargetSave);
 

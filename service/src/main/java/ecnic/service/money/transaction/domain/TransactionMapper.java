@@ -25,7 +25,7 @@ final class TransactionMapper {
   static TransactionEntity convertToEntity(CreateTransaction createTransaction) {
     TransactionEntity entity = new TransactionEntity();
     entity.setCreatedBy(createTransaction.userId().toString());
-    entity.setModifiedBy(createTransaction.userId().toString());
+    entity.setUpdatedBy(createTransaction.userId().toString());
     entity.setItem(createTransaction.item());
     entity.setType(createTransaction.type());
     entity.setOriginalAmount(createTransaction.originalAmount());
@@ -40,7 +40,7 @@ final class TransactionMapper {
   static void updateEntityTransaction(TransactionEntity entity,
       UpdateTransaction updateTransaction) {
     entity.setAt(updateTransaction.at());
-    entity.setModifiedBy(updateTransaction.userId().toString());
+    entity.setUpdatedBy(updateTransaction.userId().toString());
     entity.setItem(updateTransaction.item());
     entity.setOriginalAmount(updateTransaction.originalAmount());
     entity.setExchangeRate(updateTransaction.exchangeRate());

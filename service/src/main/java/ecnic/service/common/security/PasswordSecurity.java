@@ -1,6 +1,6 @@
 package ecnic.service.common.security;
 
-import static ecnic.service.common.exceptions.GenericErrorCodeEnum.TECHNICAL_EXCEPTION;
+import static ecnic.service.common.exceptions.BaseExceptionEnum.TECHNICAL;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -69,7 +69,7 @@ public class PasswordSecurity {
             String encryptedPassword = Base64.getEncoder().encodeToString(digest);
             return encryptedPassword.equals(storedHash);
         } catch (NoSuchAlgorithmException nsa) {
-            log.error(TECHNICAL_EXCEPTION.getCode());
+            log.error(TECHNICAL.getCode());
             return false;
         }
     }

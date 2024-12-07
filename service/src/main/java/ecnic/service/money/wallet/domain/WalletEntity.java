@@ -14,11 +14,14 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = false)
-@Table(schema = DB_SCHEMA_MONEY, name = "t_wallet")
 @Data
 @Entity
+@Table(schema = DB_SCHEMA_MONEY, name = "t_wallet")
+@EqualsAndHashCode(callSuper = false)
 class WalletEntity extends BaseEntity {
 
   @Id

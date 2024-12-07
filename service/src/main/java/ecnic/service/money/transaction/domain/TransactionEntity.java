@@ -15,11 +15,14 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = false)
-@Table(schema = DB_SCHEMA_MONEY, name = "t_transaction")
 @Data
 @Entity
+@Table(schema = DB_SCHEMA_MONEY, name = "t_transaction")
+@EqualsAndHashCode(callSuper = false)
 class TransactionEntity extends BaseEntity {
 
   @Id

@@ -1,11 +1,10 @@
 package ecnic.service.user;
 
 import ecnic.service.common.models.PagedResult;
-import ecnic.service.user.domain.models.CreateUser;
+import ecnic.service.common.security.UserCredential;
 import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.UpdateUser;
 import ecnic.service.user.domain.models.User;
-import ecnic.service.common.security.UserCredential;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.domain.Pageable;

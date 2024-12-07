@@ -1,7 +1,6 @@
 package ecnic.service.user.domain;
 
 import ecnic.service.common.security.UserCredential;
-import ecnic.service.user.domain.models.CreateUser;
 import ecnic.service.user.domain.models.CreateUserDTO;
 import ecnic.service.user.domain.models.User;
 import java.util.List;

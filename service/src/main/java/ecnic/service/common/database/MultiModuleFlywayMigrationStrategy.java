@@ -2,7 +2,7 @@ package ecnic.service.common.database;
 
 import static ecnic.service.common.constants.DatabaseConstant.DB_SCHEMA_DOCUMENT;
 import static ecnic.service.common.constants.DatabaseConstant.DB_SCHEMA_MONEY;
-import static ecnic.service.common.constants.DatabaseConstant.USER;
+import static ecnic.service.common.constants.DatabaseConstant.DB_SCHEMA_USER;
 
 import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
@@ -16,7 +16,7 @@ public class MultiModuleFlywayMigrationStrategy implements FlywayMigrationStrate
     public void migrate(Flyway flyway) {
         var dataSource = flyway.getConfiguration().getDataSource();
         
-        Flyway userModule = configFlyway(USER, "db/user", dataSource);
+        Flyway userModule = configFlyway(DB_SCHEMA_USER, "db/user", dataSource);
         
         Flyway moneyModule = configFlyway(DB_SCHEMA_MONEY, "db/money", dataSource);
         

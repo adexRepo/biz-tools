@@ -1,7 +1,7 @@
 package ecnic.service.common.models;
 
 
-import ecnic.service.common.constants.BaseStatus.OperationalStatus;
+import ecnic.service.common.constants.BaseStatus.RecordStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
@@ -11,20 +11,14 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import java.time.ZonedDateTime;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
-/**
- * The type Base entity.
- */
 @MappedSuperclass
 @Data
-@EqualsAndHashCode(callSuper = false)
 @EntityListeners(value = {AuditingEntityListener.class})
 public class BaseEntity {
     
@@ -32,42 +26,42 @@ public class BaseEntity {
      * The Created by.
      */
     @CreatedBy
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_by", nullable = false, updatable = false)
     protected String createdBy;
     
     /**
      * The Created dtm.
      */
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     protected ZonedDateTime createdDtm;
     
     /**
      * The Modified by.
      */
     @LastModifiedBy
-    @Column(nullable = false)
-    protected String modifiedBy;
+    @Column(name = "updated_by", nullable = false)
+    protected String updatedBy;
     
     /**
      * The Modified dtm.
      */
     @LastModifiedDate
-    @Column(nullable = false)
-    protected ZonedDateTime modifiedDtm;
+    @Column(name = "updated_at",nullable = false)
+    protected ZonedDateTime updatedAt;
     
     /**
      * The Modified dtm.
      */
-    @Column(nullable = false)
-    protected Long version = 0L;
+    @Column(name = "version", nullable = false)
+    protected Long version;
     
     /**
      * The Status.
      */
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected OperationalStatus status;
+    @Column(name = "status", nullable = false)
+    protected RecordStatus status;
     
     /**
      * On create.
@@ -75,8 +69,8 @@ public class BaseEntity {
     @PrePersist
     protected void onCreate() {
         createdDtm = ZonedDateTime.now();
-        modifiedDtm = ZonedDateTime.now();
-        status = OperationalStatus.ACTIVE;
+        updatedAt = ZonedDateTime.now();
+        status = RecordStatus.ACTIVE;
     }
     
     /**
@@ -84,7 +78,7 @@ public class BaseEntity {
      */
     @PreUpdate
     protected void onUpdate() {
-        modifiedDtm = ZonedDateTime.now();
+        updatedAt = ZonedDateTime.now();
         version++;
     }
     
